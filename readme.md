@@ -97,6 +97,7 @@ Inject a dependency.
 
 # limitations
 
+- tsconfig.json must be using `"target": "ES2022"` at least.
 - No support for parameter decorators.
 - Limited API support.
 
