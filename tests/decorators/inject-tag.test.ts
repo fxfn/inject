@@ -22,11 +22,11 @@ class NullLogger {
   }
 }
 
-describe('inject with tags', () => {
+describe('register with tags', () => {
   it('should resolve the correct dependency with a tag', () => {
     container.register(ILogger, { useClass: ConsoleLogger, tag: "console" })
     container.register(ILogger, { useClass: NullLogger, tag: "null" })
-    
+
     const nullLogger = container.resolve(ILogger, "null")
     assert.equal(nullLogger instanceof NullLogger, true)
 

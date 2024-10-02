@@ -36,3 +36,48 @@ class User {
 const user = container.resolve(User)
   // ?^ { user: { details: "jim" } }
 ```
+
+## api
+
+A *lot* of inspiration was taken from [TSyringe](https://github.com/microsoft/tsyringe).
+
+### `container.register(type, options)`
+
+Register a type with the container.
+
+| Parameter | Description | Optional |
+| --------- | ----------- | -------- |
+| `type: Type<T>` | The type to register. | - |
+| `options: RegistrationOptions` | Options for the registration. | ✅ |
+
+#### `RegistrationOptions`
+
+| Option | Description | Optional |
+| ------ | ----------- | -------- |
+| `useClass` | The class to use for the registration. | - |
+| `useValue` | The value to use for the registration. | - |
+| `tag` | The tag to use for the registration. | ✅ |
+
+One of either `useClass` or `useValue` must be provided.
+
+### `container.resolve(type, tag?)`
+
+Resolve a type from the container.
+
+| Parameter | Description | Optional |
+| --------- | ----------- | -------- |
+| `type: Type<T>` | The type to resolve. | - |
+| `tag?: string` | The tag to use for the resolution. | ✅ |
+
+### `@injectable`
+
+Mark a class as injectable.
+
+### `@inject(type: Type<T>, tag?: string)`
+
+Inject a dependency.
+
+| Parameter | Description | Optional |
+| --------- | ----------- | -------- |
+| `type: Type<T>` | The type of the dependency to inject. | - |
+| `tag?: string` | The tag to use for the injection. | ✅ |
