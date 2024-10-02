@@ -3,8 +3,8 @@
 Zero-dependency basic DI framework using modern typescript@5 decorators. (no experimentalDecorators, no emitDecoratorMetadata, no reflect-metadata)
 
 - [fxfn/inject](#fxfninject)
-- [get started](#get-started)
-- [examples](#examples)
+  - [get started](#get-started)
+  - [examples](#examples)
 - [api](#api)
   - [`container.register(type, options)`](#containerregistertype-options)
     - [`RegistrationOptions`](#registrationoptions)
@@ -49,11 +49,11 @@ const user = container.resolve(User)
   // ?^ { user: { details: "jim" } }
 ```
 
-## api
+# api
 
 A *lot* of inspiration was taken from [TSyringe](https://github.com/microsoft/tsyringe).
 
-### `container.register(type, options)`
+## `container.register(type, options)`
 
 Register a type with the container.
 
@@ -62,7 +62,7 @@ Register a type with the container.
 | `type: Type<T>` | The type to register. | - |
 | `options: RegistrationOptions` | Options for the registration. | ✅ |
 
-#### `RegistrationOptions`
+### `RegistrationOptions`
 
 | Option | Description | Optional |
 | ------ | ----------- | -------- |
@@ -72,7 +72,7 @@ Register a type with the container.
 
 One of either `useClass` or `useValue` must be provided.
 
-### `container.resolve(type, tag?)`
+## `container.resolve(type, tag?)`
 
 Resolve a type from the container.
 
@@ -81,11 +81,11 @@ Resolve a type from the container.
 | `type: Type<T>` | The type to resolve. | - |
 | `tag?: string` | The tag to use for the resolution. | ✅ |
 
-### `@injectable`
+## `@injectable`
 
 Mark a class as injectable.
 
-### `@inject(type: Type<T>, tag?: string)`
+## `@inject(type: Type<T>, tag?: string)`
 
 Inject a dependency.
 
@@ -95,11 +95,11 @@ Inject a dependency.
 | `tag?: string` | The tag to use for the injection. | ✅ |
 
 
-## limitations
+# limitations
 
 - No support for parameter decorators.
 - Limited API support.
 
-## contributing
+# contributing
 
 PRs welcome, as long as they don't require adding dependencies to the project.
