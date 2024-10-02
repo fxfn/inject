@@ -2,6 +2,17 @@
 
 Zero-dependency basic DI framework using modern typescript@5 decorators. (no emitDecorators, no reflect-metadata)
 
+- [get started](#get-started)
+- [examples](#examples)
+- [api](#api)
+  - [`container.register(type, options)`](#containerregistertype-options)
+    - [`RegistrationOptions`](#registrationoptions)
+  - [`container.resolve(type, tag?)`](#containerresolvetype-tag)
+  - [`@injectable`](#injectable)
+  - [`@inject(type: Type<T>, tag?: string)`](#injecttype-typet-tag-string)
+- [limitations](#limitations)
+- [contributing](#contributing)
+
 ## get started
 
 > *******************************************************************
