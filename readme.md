@@ -1,6 +1,6 @@
 # fxfn/inject
 
-Zero-dependency, modern typescript@5 decorators basic DI framework.
+Zero-dependency basic DI framework using modern typescript@5 decorators. (no emitDecorators, no reflect-metadata, no class-transformers)
 
 ## get started
 
