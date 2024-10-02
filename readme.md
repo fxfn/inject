@@ -1,6 +1,6 @@
 # fxfn/inject
 
-Zero-dependency basic DI framework using modern typescript@5 decorators. (no emitDecorators, no reflect-metadata, no class-transformers)
+Zero-dependency basic DI framework using modern typescript@5 decorators. (no emitDecorators, no reflect-metadata)
 
 ## get started
 
@@ -81,3 +81,13 @@ Inject a dependency.
 | --------- | ----------- | -------- |
 | `type: Type<T>` | The type of the dependency to inject. | - |
 | `tag?: string` | The tag to use for the injection. | ✅ |
+
+
+## limitations
+
+- No support for parameter decorators.
+- Limited API support.
+
+## contributing
+
+PRs welcome, as long as they don't require adding dependencies to the project.
