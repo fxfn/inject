@@ -1,7 +1,8 @@
 # fxfn/inject
 
-Zero-dependency basic DI framework using modern typescript@5 decorators. (no emitDecorators, no reflect-metadata)
+Zero-dependency basic DI framework using modern typescript@5 decorators. (no experimentalDecorators, no emitDecoratorMetadata, no reflect-metadata)
 
+- [fxfn/inject](#fxfninject)
 - [get started](#get-started)
 - [examples](#examples)
 - [api](#api)
