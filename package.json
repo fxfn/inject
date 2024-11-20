@@ -1,7 +1,20 @@
 {
   "name": "@fxfn/inject",
+  "description": "Zero-dependency basic DI framework using typescript@5 decorators.",
   "module": "src/index.ts",
   "type": "module",
+  "private": true,
+  "publishConfig": {
+    "access": "restricted"
+  },
+  "keywords": [
+    "fxfn",
+    "inject",
+    "@fxfn/inject",
+    "di",
+    "dependency-injection",
+    "container"
+  ],
   "scripts": {
     "test": "node --import tsx --test **/**/*.test.ts **/*.test.ts",
     "build": "tsup"
@@ -15,5 +28,6 @@
     "tsup": "^8.1.0",
     "tsx": "^4.16.0",
     "typescript": "^5.0.0"
-  }
+  },
+  "packageManager": "pnpm@8.6.0"
 }
