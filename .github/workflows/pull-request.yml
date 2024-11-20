@@ -1,0 +1,18 @@
+name: ci/pull_request
+
+on:
+  push:
+    branches-ignore:
+      - master
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  typecheck:
+    uses: fxfn/actions/.github/workflows/typecheck.yml@v2
+  
+  test:
+    uses: fxfn/actions/.github/workflows/test.yml@v2

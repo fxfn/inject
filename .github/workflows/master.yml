@@ -1,0 +1,37 @@
+name: ci/master
+
+on:
+  push:
+    branches:
+      - master
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  typecheck:
+    uses: fxfn/actions/.github/workflows/typecheck.yml@v2
+  
+  test:
+    uses: fxfn/actions/.github/workflows/test.yml@v2
+
+  version:
+    needs:
+      - test
+      - typecheck
+    if: ${{ needs.test.outputs.outcome == 'success' }} && ${{ needs.typecheck.outputs.outcome == 'success' }}
+    uses: fxfn/actions/.github/workflows/version.yml@v2
+    secrets: inherit
+
+  release:
+    needs:
+      - version
+    uses: fxfn/actions/.github/workflows/release.yml@v2
+    if: ${{ needs.version.outputs.new_release_published == 'true' }}
+    secrets: inherit
+    with:
+      version: ${{ needs.version.outputs.new_release_version }}
+      body: ${{ needs.version.outputs.new_release_notes }}
+      artifact_name: ${{ needs.build.outputs.artifact_name }}
