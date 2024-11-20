@@ -42,4 +42,33 @@ describe('inject', () => {
     assert.equal(myApp.database.provider instanceof DatabaseProvider, true)
     assert.equal(myApp.database.provider.name, 'sqlite')
   })
+
+  it('should inject the correct dependency if a tag is provided', () => {
+    abstract class IDatabaseProvider {
+      abstract name: string
+    }
+
+    class SqliteDatabaseProvider implements IDatabaseProvider {
+      name = "sqlite"
+    }
+
+    class MySQLDatabaseProvider implements IDatabaseProvider {
+      name = "mysql"
+    }
+
+    container.register(IDatabaseProvider, { useClass: SqliteDatabaseProvider, tag: 'sqlite' })
+    container.register(IDatabaseProvider, { useClass: MySQLDatabaseProvider, tag: 'mysql' })
+
+    @injectable
+    class MyApp {
+      @inject(IDatabaseProvider, 'mysql') mysqlProvder: IDatabaseProvider
+      @inject(IDatabaseProvider, 'sqlite') sqliteProvider: IDatabaseProvider
+    }
+
+    const myApp = container.resolve(MyApp)
+    assert.equal(myApp.mysqlProvder instanceof MySQLDatabaseProvider, true)
+    assert.equal(myApp.mysqlProvder.name, 'mysql')
+    assert.equal(myApp.sqliteProvider instanceof SqliteDatabaseProvider, true)
+    assert.equal(myApp.sqliteProvider.name, 'sqlite')
+  })
 })
