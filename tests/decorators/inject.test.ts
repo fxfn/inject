@@ -71,4 +71,26 @@ describe('inject', () => {
     assert.equal(myApp.sqliteProvider instanceof SqliteDatabaseProvider, true)
     assert.equal(myApp.sqliteProvider.name, 'sqlite')
   })
+
+  it('should inject the dependency in the order they are registered in', () => {
+
+    abstract class IDataProvider {
+      abstract name: string
+    }
+
+    class OneDataProvider implements IDataProvider {
+      name = "one"
+    }
+
+    class TwoDataProvider implements IDataProvider {
+      name = "two"
+    }
+
+    container.register(IDataProvider, { useClass: OneDataProvider, tag: 'one' })
+    container.register(IDataProvider, { useClass: TwoDataProvider, tag: 'two' })
+
+    const providers = container.resolveAll(IDataProvider)
+    assert.equal(providers[0].name, 'one')
+    assert.equal(providers[1].name, 'two')
+  })
 })
