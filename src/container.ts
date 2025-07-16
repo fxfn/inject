@@ -111,6 +111,7 @@ export class Container<T = any> {
       return this.resolveRegistration(registration) as T
     }
 
+    console.error(`UndefinedConstructor: ${token.toString()}`)
     throw new Error('UndefinedConstructor')
   }
 
