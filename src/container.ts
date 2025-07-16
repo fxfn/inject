@@ -3,6 +3,7 @@ import { isProvider, type Provider } from "./providers";
 import { isClassProvider } from "./providers/class-provider";
 import { Lifecycle } from "./lifecycle";
 import { Constructor, InjectionToken } from "./types";
+import { isValueProvider } from "./providers/value-provider";
 
 type RegistrationOptions = {
   lifecycle: Lifecycle;
@@ -76,6 +77,9 @@ export class Container<T = any> {
       }
 
       return resolved
+    }
+    else if (isValueProvider(registration.provider)) {
+      return registration.provider.useValue
     }
 
     throw new Error('UnknownRegistration')

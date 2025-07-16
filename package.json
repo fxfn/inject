@@ -1,7 +1,15 @@
 {
   "name": "@fxfn/inject",
+  "version": "0.0.1",
   "description": "Zero-dependency basic DI framework using typescript@5 decorators.",
   "module": "src/index.ts",
+  "main": "dist/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.js"
+    }
+  },
   "type": "module",
   "private": true,
   "publishConfig": {
