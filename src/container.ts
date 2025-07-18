@@ -47,6 +47,7 @@ export class Container<T = any> {
   ) {
     let provider: Provider<T>
     let tag = providerOrConstructor.tag || undefined
+
     if (!isProvider(providerOrConstructor)) {
       provider = { useClass: providerOrConstructor }
     }
@@ -64,6 +65,7 @@ export class Container<T = any> {
     const returnInstance = isSingleton || isContainerScoped
     
     let resolved: T
+
     if (isClassProvider(registration.provider)) {
       if (returnInstance) {
         if (!registration.instance) {
@@ -115,6 +117,15 @@ export class Container<T = any> {
     throw new Error('UndefinedConstructor')
   }
 
+  tryResolve<T>(token: InjectionToken<T>, tag?: string): T | undefined {
+    let registration = this.getRegistration(token, tag)
+    if (registration) {
+      return this.resolveRegistration(registration) as T
+    }
+
+    return undefined
+  }
+
   resolveAll<T>(token: InjectionToken<T>, tag?: string): T[] {
     let registrations = this.getAllRegistration(token)
     if (registrations) {
@@ -126,6 +137,10 @@ export class Container<T = any> {
 
   createContainer(): Container {
     return new Container({ parent: this })
+  }
+
+  reset() {
+    this._registry = new Registry<Registration>()
   }
 }
 

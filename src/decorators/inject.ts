@@ -7,7 +7,7 @@ export function inject(token: InjectionToken<any>, tag?: string) {
     context: ClassFieldDecoratorContext<any, any>
   ) {
     return function (value: any): any {
-      return container.resolve(token, tag)
+      return container.tryResolve(token, tag)
     }
   }
 }
