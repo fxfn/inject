@@ -1,5 +1,4 @@
-import { describe, it } from "node:test";
-import assert from "node:assert/strict";
+import { describe, it, expect } from "vitest";
 import { injectable } from "../../src/decorators/injectable";
 import { container } from "../../src";
 import { injectAll } from "../../src/decorators/inject-all";
@@ -33,7 +32,7 @@ describe('injectAll', () => {
     }
 
     const myApp = container.resolve(MyApp)
-    assert.equal(myApp.providers.length, 3)
+    expect(myApp.providers.length).toBe(3)
   })
 
   it('should inject all the registered dependencies from a token and return an array', () => {
@@ -63,6 +62,6 @@ describe('injectAll', () => {
     }
 
     const myApp = container.resolve(MyApp)
-    assert.equal(myApp.providers.length, 3)
+    expect(myApp.providers.length).toBe(3)
   })
 })

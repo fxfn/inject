@@ -1,6 +1,4 @@
-import { it, describe } from "node:test"
-import assert from "node:assert/strict"
-import { inject } from "../../src/decorators/inject"
+import { it, describe, expect } from "vitest"
 import { injectable } from "../../src/decorators/injectable"
 import { container } from "../../src"
 
@@ -28,9 +26,9 @@ describe('register with tags', () => {
     container.register(ILogger, { useClass: NullLogger, tag: "null" })
 
     const nullLogger = container.resolve(ILogger, "null")
-    assert.equal(nullLogger instanceof NullLogger, true)
+    expect(nullLogger instanceof NullLogger).toBe(true)
 
     const consoleLogger = container.resolve(ILogger, "console")
-    assert.equal(consoleLogger instanceof ConsoleLogger, true)
+    expect(consoleLogger instanceof ConsoleLogger).toBe(true)
   })
 })

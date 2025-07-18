@@ -1,5 +1,4 @@
-import { describe, it } from "node:test"
-import assert from "node:assert/strict"
+import { describe, it, expect } from "vitest"
 import { container } from "../../src"
 import { injectable } from "../../src/decorators/injectable"
 
@@ -11,7 +10,7 @@ describe('injectable', () => {
     }
 
     let instance = container.resolve(InjectableTestClass)
-    assert.equal(instance instanceof InjectableTestClass, true)
-    assert.equal(instance.injected, true)
+    expect(instance instanceof InjectableTestClass).toBe(true)
+    expect(instance.injected).toBe(true)
   })
 })

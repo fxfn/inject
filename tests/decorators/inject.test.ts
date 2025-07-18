@@ -1,5 +1,4 @@
-import { it, describe } from "node:test"
-import assert from "node:assert/strict"
+import { it, describe, expect } from "vitest"
 import { inject } from "../../src/decorators/inject"
 import { injectable } from "../../src/decorators/injectable"
 import { container } from "../../src"
@@ -17,8 +16,8 @@ describe('inject', () => {
     }
 
     let myApp = container.resolve(MyApp)
-    assert.equal(myApp.database instanceof Database, true)
-    assert.equal(myApp.database.connected, false)
+    expect(myApp.database instanceof Database).toBe(true)
+    expect(myApp.database.connected).toBe(false)
   })
 
   it('should inject deep dependencies', () => {
@@ -38,9 +37,9 @@ describe('inject', () => {
     }
 
     const myApp = container.resolve(MyApp)
-    assert.equal(myApp.database instanceof Database, true)
-    assert.equal(myApp.database.provider instanceof DatabaseProvider, true)
-    assert.equal(myApp.database.provider.name, 'sqlite')
+    expect(myApp.database instanceof Database).toBe(true)
+    expect(myApp.database.provider instanceof DatabaseProvider).toBe(true)
+    expect(myApp.database.provider.name).toBe('sqlite')
   })
 
   it('should inject the correct dependency if a tag is provided', () => {
@@ -66,10 +65,10 @@ describe('inject', () => {
     }
 
     const myApp = container.resolve(MyApp)
-    assert.equal(myApp.mysqlProvder instanceof MySQLDatabaseProvider, true)
-    assert.equal(myApp.mysqlProvder.name, 'mysql')
-    assert.equal(myApp.sqliteProvider instanceof SqliteDatabaseProvider, true)
-    assert.equal(myApp.sqliteProvider.name, 'sqlite')
+    expect(myApp.mysqlProvder instanceof MySQLDatabaseProvider).toBe(true)
+    expect(myApp.mysqlProvder.name).toBe('mysql')
+    expect(myApp.sqliteProvider instanceof SqliteDatabaseProvider).toBe(true)
+    expect(myApp.sqliteProvider.name).toBe('sqlite')
   })
 
   it('should inject the dependency in the order they are registered in', () => {
@@ -90,7 +89,7 @@ describe('inject', () => {
     container.register(IDataProvider, { useClass: TwoDataProvider, tag: 'two' })
 
     const providers = container.resolveAll(IDataProvider)
-    assert.equal(providers[0].name, 'one')
-    assert.equal(providers[1].name, 'two')
+    expect(providers[0].name).toBe('one')
+    expect(providers[1].name).toBe('two')
   })
 })

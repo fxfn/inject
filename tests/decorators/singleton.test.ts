@@ -1,5 +1,4 @@
-import { describe, it } from "node:test"
-import assert from "node:assert/strict"
+import { describe, it, expect } from "vitest"
 import { injectable } from "../../src/decorators/injectable"
 import { inject } from "../../src/decorators/inject"
 import { container } from "../../src"
@@ -19,7 +18,7 @@ describe('singleton', () => {
     }
 
     const myApp = container.resolve(MyApp)
-    assert.notEqual(myApp.database1.id, myApp.database2.id)
+    expect(myApp.database1.id).not.toBe(myApp.database2.id)
   })
 
   it('injecting a singleton should re-use the existing', () => {
@@ -37,6 +36,6 @@ describe('singleton', () => {
     }
 
     const myApp = container.resolve(MyApp)
-    assert.equal(myApp.database1.id, myApp.database2.id)
+    expect(myApp.database1.id).toBe(myApp.database2.id)
   })
 })
