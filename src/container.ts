@@ -26,6 +26,8 @@ export class Container<T = any> {
   private _registry = new Registry<Registration>()
   parent?: Container
 
+  public id = crypto.randomUUID()
+
   private construct<T>(
     ctor: Constructor<T>
   ): T {

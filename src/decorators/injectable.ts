@@ -1,14 +1,16 @@
 import { container } from "../container"
+import { InjectionToken } from "../types"
 import { singleton } from "./singleton"
 
 type Constructor<T = {}> = new (...args: any[]) => T
 
 export function injectable<Class extends Constructor>(
-  Value: Class,
-  context: ClassDecoratorContext<Class>
+  token: InjectionToken
 ) {
-  container.register(Value, { useClass: Value })
-  return Value
+  return (Value: Class, context: ClassDecoratorContext<Class>) => {
+    container.register(token, { useClass: Value })
+    return Value
+  }
 }
 
 injectable.singleton = singleton
